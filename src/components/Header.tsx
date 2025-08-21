@@ -2,6 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { Menu } from "lucide-react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -16,15 +17,19 @@ export const Header = () => {
           </div>
           
           <nav className="hidden md:flex items-center space-x-8">
-            <a href="/" className="text-gray-700 hover:text-indigo-600 transition-colors">Home</a>
-            <a href="/features" className="text-gray-700 hover:text-indigo-600 transition-colors">Features</a>
-            <a href="/pricing" className="text-gray-700 hover:text-indigo-600 transition-colors">Pricing</a>
-            <a href="/blog" className="text-gray-700 hover:text-indigo-600 transition-colors">Blog</a>
+            <Link to="/" className="text-gray-700 hover:text-indigo-600 transition-colors">Home</Link>
+            <Link to="/features" className="text-gray-700 hover:text-indigo-600 transition-colors">Features</Link>
+            <Link to="/pricing" className="text-gray-700 hover:text-indigo-600 transition-colors">Pricing</Link>
+            <Link to="/blog" className="text-gray-700 hover:text-indigo-600 transition-colors">Blog</Link>
           </nav>
 
           <div className="hidden md:flex items-center space-x-4">
-            <Button variant="ghost" className="text-gray-700">Login</Button>
-            <Button className="bg-indigo-600 hover:bg-indigo-700">Start Free Trial</Button>
+            <Button variant="ghost" className="text-gray-700" asChild>
+              <Link to="/login">Login</Link>
+            </Button>
+            <Button className="bg-indigo-600 hover:bg-indigo-700" asChild>
+              <Link to="/signup">Start Free Trial</Link>
+            </Button>
           </div>
 
           <button 
@@ -38,13 +43,17 @@ export const Header = () => {
         {isMenuOpen && (
           <div className="md:hidden mt-4 pb-4 border-t pt-4">
             <nav className="flex flex-col space-y-4">
-              <a href="/" className="text-gray-700">Home</a>
-              <a href="/features" className="text-gray-700">Features</a>
-              <a href="/pricing" className="text-gray-700">Pricing</a>
-              <a href="/blog" className="text-gray-700">Blog</a>
+              <Link to="/" className="text-gray-700">Home</Link>
+              <Link to="/features" className="text-gray-700">Features</Link>
+              <Link to="/pricing" className="text-gray-700">Pricing</Link>
+              <Link to="/blog" className="text-gray-700">Blog</Link>
               <div className="flex flex-col space-y-2 pt-4 border-t">
-                <Button variant="ghost" className="justify-start">Login</Button>
-                <Button className="bg-indigo-600 hover:bg-indigo-700">Start Free Trial</Button>
+                <Button variant="ghost" className="justify-start" asChild>
+                  <Link to="/login">Login</Link>
+                </Button>
+                <Button className="bg-indigo-600 hover:bg-indigo-700" asChild>
+                  <Link to="/signup">Start Free Trial</Link>
+                </Button>
               </div>
             </nav>
           </div>
