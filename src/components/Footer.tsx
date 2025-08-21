@@ -1,4 +1,3 @@
-
 import { Twitter, Linkedin, Instagram } from "lucide-react";
 
 export const Footer = () => {
@@ -15,37 +14,81 @@ export const Footer = () => {
               The first proactive AI partner for social media management.
             </p>
           </div>
-          
+
           <div>
             <h3 className="font-semibold text-white mb-4">Product</h3>
             <ul className="space-y-2">
-              <li><a href="/features" className="hover:text-white transition-colors">Features</a></li>
-              <li><a href="/pricing" className="hover:text-white transition-colors">Pricing</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">API</a></li>
+              <li>
+                <a
+                  href="/features"
+                  className="hover:text-white transition-colors"
+                >
+                  Features
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/pricing"
+                  className="hover:text-white transition-colors"
+                >
+                  Pricing
+                </a>
+              </li>
+              <li>
+                <a href="#" className="hover:text-white transition-colors">
+                  API
+                </a>
+              </li>
             </ul>
           </div>
-          
+
           <div>
             <h3 className="font-semibold text-white mb-4">Company</h3>
             <ul className="space-y-2">
-              <li><a href="/blog" className="hover:text-white transition-colors">Blog</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">About</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Careers</a></li>
+              <li>
+                <a href="/blog" className="hover:text-white transition-colors">
+                  Blog
+                </a>
+              </li>
+              <li>
+                <a href="#" className="hover:text-white transition-colors">
+                  About
+                </a>
+              </li>
+              <li>
+                <a href="#" className="hover:text-white transition-colors">
+                  Careers
+                </a>
+              </li>
             </ul>
           </div>
-          
+
           <div>
             <h3 className="font-semibold text-white mb-4">Legal</h3>
             <ul className="space-y-2">
-              <li><a href="#" className="hover:text-white transition-colors">Privacy Policy</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Terms of Service</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Security</a></li>
+              <li>
+                <a href="#" className="hover:text-white transition-colors">
+                  Privacy Policy
+                </a>
+              </li>
+              <li>
+                <a href="#" className="hover:text-white transition-colors">
+                  Terms of Service
+                </a>
+              </li>
+              <li>
+                <a href="#" className="hover:text-white transition-colors">
+                  Security
+                </a>
+              </li>
             </ul>
           </div>
         </div>
-        
+
         <div className="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-gray-400">© 2025 Momentum AI. All rights reserved.</p>
+          <p className="text-gray-400">
+            © 2025 Momentum AI. All rights reserved.
+          </p>
           <div className="flex space-x-6 mt-4 md:mt-0">
             <Twitter className="h-5 w-5 text-gray-400 hover:text-white cursor-pointer transition-colors" />
             <Linkedin className="h-5 w-5 text-gray-400 hover:text-white cursor-pointer transition-colors" />

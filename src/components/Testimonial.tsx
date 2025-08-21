@@ -1,4 +1,3 @@
-
 import { Quote } from "lucide-react";
 
 export const Testimonial = () => {
@@ -8,10 +7,14 @@ export const Testimonial = () => {
         <div className="max-w-4xl mx-auto text-center">
           <Quote className="h-12 w-12 text-indigo-600 mx-auto mb-6" />
           <blockquote className="text-2xl lg:text-3xl font-medium text-gray-900 leading-relaxed mb-8">
-            "Momentum AI changed the game for us. I went from spending 80% of my time searching for ideas to 80% of my time engaging with our community on content I knew would perform. It's like having a brilliant strategist on my team."
+            "Momentum AI changed the game for us. I went from spending 80% of my
+            time searching for ideas to 80% of my time engaging with our
+            community on content I knew would perform. It's like having a
+            brilliant strategist on my team."
           </blockquote>
           <cite className="text-lg text-gray-600">
-            — Sarah J., Head of Social, <span className="font-medium">TechFlow</span>
+            — Sarah J., Head of Social,{" "}
+            <span className="font-medium">TechFlow</span>
           </cite>
         </div>
       </div>

@@ -1,20 +1,29 @@
-
 import { ReactNode } from "react";
-import { SidebarProvider, Sidebar, SidebarContent, SidebarHeader, SidebarMenu, SidebarMenuItem, SidebarMenuButton, SidebarInset, SidebarTrigger } from "@/components/ui/sidebar";
+import {
+  SidebarProvider,
+  Sidebar,
+  SidebarContent,
+  SidebarHeader,
+  SidebarMenu,
+  SidebarMenuItem,
+  SidebarMenuButton,
+  SidebarInset,
+  SidebarTrigger,
+} from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
-import { 
-  LayoutDashboard, 
-  Settings, 
-  CreditCard, 
-  Link as LinkIcon, 
-  Upload, 
-  FileText, 
-  BarChart3, 
+import {
+  LayoutDashboard,
+  Settings,
+  CreditCard,
+  Link as LinkIcon,
+  Upload,
+  FileText,
+  BarChart3,
   Bell,
   User,
   Calendar,
   Zap,
-  TrendingUp
+  TrendingUp,
 } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 
@@ -29,7 +38,11 @@ const menuItems = [
   { title: "Trend Discovery", url: "/dashboard/trends", icon: TrendingUp },
   { title: "Content Library", url: "/dashboard/library", icon: BarChart3 },
   { title: "Business Kit", url: "/dashboard/business-kit", icon: Upload },
-  { title: "Social Accounts", url: "/dashboard/social-accounts", icon: LinkIcon },
+  {
+    title: "Social Accounts",
+    url: "/dashboard/social-accounts",
+    icon: LinkIcon,
+  },
   { title: "Analytics", url: "/dashboard/analytics", icon: BarChart3 },
   { title: "Billing", url: "/dashboard/billing", icon: CreditCard },
   { title: "Notifications", url: "/dashboard/notifications", icon: Bell },
@@ -51,13 +64,19 @@ export const DashboardLayout = ({ children }: DashboardLayoutProps) => {
               <span className="text-lg font-bold">Momentum AI</span>
             </div>
           </SidebarHeader>
-          
+
           <SidebarContent className="p-2">
             <SidebarMenu>
               {menuItems.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild isActive={location.pathname === item.url}>
-                    <Link to={item.url} className="flex items-center space-x-3 px-3 py-2">
+                  <SidebarMenuButton
+                    asChild
+                    isActive={location.pathname === item.url}
+                  >
+                    <Link
+                      to={item.url}
+                      className="flex items-center space-x-3 px-3 py-2"
+                    >
                       <item.icon className="h-5 w-5" />
                       <span>{item.title}</span>
                     </Link>
@@ -81,10 +100,8 @@ export const DashboardLayout = ({ children }: DashboardLayoutProps) => {
               </Button>
             </div>
           </header>
-          
-          <main className="flex-1 p-6">
-            {children}
-          </main>
+
+          <main className="flex-1 p-6">{children}</main>
         </SidebarInset>
       </div>
     </SidebarProvider>

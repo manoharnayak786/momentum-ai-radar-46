@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 
@@ -9,8 +8,8 @@ export const FinalCTA = () => {
         <h2 className="text-3xl lg:text-4xl font-bold text-white mb-8">
           Ready to Take the Momentum?
         </h2>
-        <Button 
-          size="lg" 
+        <Button
+          size="lg"
           className="bg-indigo-600 hover:bg-indigo-700 text-lg px-8 py-4 h-auto"
         >
           Start Your 14-Day Free Trial

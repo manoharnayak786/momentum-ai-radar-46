@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Zap, TrendingUp } from "lucide-react";
 
@@ -16,13 +15,16 @@ export const Hero = () => {
                 </span>
               </h1>
               <p className="text-xl text-gray-600 leading-relaxed">
-                Momentum AI is the first proactive AI partner for social media. We scan the digital world for content opportunities 24/7, so you can focus on what matters. We find the opportunities, you take the credit.
+                Momentum AI is the first proactive AI partner for social media.
+                We scan the digital world for content opportunities 24/7, so you
+                can focus on what matters. We find the opportunities, you take
+                the credit.
               </p>
             </div>
-            
+
             <div className="space-y-4">
-              <Button 
-                size="lg" 
+              <Button
+                size="lg"
                 className="bg-indigo-600 hover:bg-indigo-700 text-lg px-8 py-4 h-auto"
               >
                 Start Your 14-Day Free Trial
@@ -43,30 +45,40 @@ export const Hero = () => {
                     <div className="w-3 h-3 rounded-full bg-green-500"></div>
                   </div>
                 </div>
-                
+
                 <div className="space-y-3">
                   <div className="bg-gradient-to-r from-indigo-600 to-indigo-700 rounded-lg p-4">
                     <div className="flex items-center space-x-2 mb-2">
                       <TrendingUp className="h-4 w-4" />
-                      <span className="text-sm font-medium">Trending Hashtag</span>
+                      <span className="text-sm font-medium">
+                        Trending Hashtag
+                      </span>
                     </div>
-                    <p className="text-sm">#AIRevolution is trending in your industry</p>
+                    <p className="text-sm">
+                      #AIRevolution is trending in your industry
+                    </p>
                   </div>
-                  
+
                   <div className="bg-gradient-to-r from-teal-600 to-teal-700 rounded-lg p-4">
                     <div className="flex items-center space-x-2 mb-2">
                       <Zap className="h-4 w-4" />
-                      <span className="text-sm font-medium">Competitor Viral Post</span>
+                      <span className="text-sm font-medium">
+                        Competitor Viral Post
+                      </span>
                     </div>
-                    <p className="text-sm">TechCorp's post gained 10x usual engagement</p>
+                    <p className="text-sm">
+                      TechCorp's post gained 10x usual engagement
+                    </p>
                   </div>
-                  
+
                   <div className="bg-gradient-to-r from-purple-600 to-purple-700 rounded-lg p-4">
                     <div className="flex items-center space-x-2 mb-2">
                       <Zap className="h-4 w-4" />
                       <span className="text-sm font-medium">Local Event</span>
                     </div>
-                    <p className="text-sm">Tech Conference starting tomorrow in your city</p>
+                    <p className="text-sm">
+                      Tech Conference starting tomorrow in your city
+                    </p>
                   </div>
                 </div>
               </div>

@@ -38,12 +38,15 @@ const App = () => (
           <Route path="/blog" element={<Blog />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-          
+
           {/* Dashboard Routes */}
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/dashboard/billing" element={<Billing />} />
           <Route path="/dashboard/settings" element={<Settings />} />
-          <Route path="/dashboard/social-accounts" element={<SocialAccounts />} />
+          <Route
+            path="/dashboard/social-accounts"
+            element={<SocialAccounts />}
+          />
           <Route path="/dashboard/business-kit" element={<BusinessKit />} />
           <Route path="/dashboard/content-studio" element={<ContentStudio />} />
           <Route path="/dashboard/calendar" element={<ContentCalendar />} />
@@ -51,7 +54,7 @@ const App = () => (
           <Route path="/dashboard/library" element={<ContentLibrary />} />
           <Route path="/dashboard/analytics" element={<Analytics />} />
           <Route path="/dashboard/notifications" element={<Notifications />} />
-          
+
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

@@ -1,6 +1,11 @@
-
 import { DashboardLayout } from "@/components/DashboardLayout";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { Badge } from "@/components/ui/badge";
@@ -14,7 +19,7 @@ const SocialAccounts = () => {
       account: "@yourhandle",
       followers: "2.5K",
       autoPublish: true,
-      status: "Active"
+      status: "Active",
     },
     {
       name: "Instagram",
@@ -23,7 +28,7 @@ const SocialAccounts = () => {
       account: "@yourbusiness",
       followers: "5.2K",
       autoPublish: false,
-      status: "Active"
+      status: "Active",
     },
     {
       name: "Facebook",
@@ -32,7 +37,7 @@ const SocialAccounts = () => {
       account: "",
       followers: "",
       autoPublish: false,
-      status: "Not Connected"
+      status: "Not Connected",
     },
     {
       name: "LinkedIn",
@@ -41,7 +46,7 @@ const SocialAccounts = () => {
       account: "Your Business",
       followers: "1.8K",
       autoPublish: true,
-      status: "Active"
+      status: "Active",
     },
     {
       name: "TikTok",
@@ -50,7 +55,7 @@ const SocialAccounts = () => {
       account: "",
       followers: "",
       autoPublish: false,
-      status: "Not Connected"
+      status: "Not Connected",
     },
     {
       name: "Pinterest",
@@ -59,8 +64,8 @@ const SocialAccounts = () => {
       account: "",
       followers: "",
       autoPublish: false,
-      status: "Not Connected"
-    }
+      status: "Not Connected",
+    },
   ];
 
   return (
@@ -68,12 +73,20 @@ const SocialAccounts = () => {
       <div className="space-y-6">
         <div>
           <h1 className="text-3xl font-bold text-gray-900">Social Accounts</h1>
-          <p className="text-gray-600 mt-2">Connect and manage your social media accounts for automated publishing.</p>
+          <p className="text-gray-600 mt-2">
+            Connect and manage your social media accounts for automated
+            publishing.
+          </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {socialPlatforms.map((platform, index) => (
-            <Card key={index} className={platform.connected ? "border-green-200 bg-green-50/30" : ""}>
+            <Card
+              key={index}
+              className={
+                platform.connected ? "border-green-200 bg-green-50/30" : ""
+              }
+            >
               <CardHeader>
                 <CardTitle className="flex items-center justify-between">
                   <div className="flex items-center space-x-2">
@@ -90,7 +103,9 @@ const SocialAccounts = () => {
                   <>
                     <div>
                       <p className="font-medium">{platform.account}</p>
-                      <p className="text-sm text-gray-600">{platform.followers} followers</p>
+                      <p className="text-sm text-gray-600">
+                        {platform.followers} followers
+                      </p>
                     </div>
                     <div className="flex items-center justify-between">
                       <span className="text-sm">Auto-publish</span>
@@ -100,7 +115,11 @@ const SocialAccounts = () => {
                       <Button variant="outline" size="sm" className="flex-1">
                         Settings
                       </Button>
-                      <Button variant="destructive" size="sm" className="flex-1">
+                      <Button
+                        variant="destructive"
+                        size="sm"
+                        className="flex-1"
+                      >
                         Disconnect
                       </Button>
                     </div>
@@ -108,7 +127,8 @@ const SocialAccounts = () => {
                 ) : (
                   <>
                     <p className="text-sm text-gray-600">
-                      Connect your {platform.name} account to enable automated content publishing.
+                      Connect your {platform.name} account to enable automated
+                      content publishing.
                     </p>
                     <Button className="w-full bg-indigo-600 hover:bg-indigo-700">
                       Connect {platform.name}
@@ -124,27 +144,36 @@ const SocialAccounts = () => {
         <Card>
           <CardHeader>
             <CardTitle>Global Publishing Settings</CardTitle>
-            <CardDescription>Configure default settings for all connected accounts</CardDescription>
+            <CardDescription>
+              Configure default settings for all connected accounts
+            </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="flex items-center justify-between">
               <div>
                 <h4 className="font-medium">Auto-publish all content</h4>
-                <p className="text-sm text-gray-600">Automatically publish approved content to all connected accounts</p>
+                <p className="text-sm text-gray-600">
+                  Automatically publish approved content to all connected
+                  accounts
+                </p>
               </div>
               <Switch />
             </div>
             <div className="flex items-center justify-between">
               <div>
                 <h4 className="font-medium">Optimal timing</h4>
-                <p className="text-sm text-gray-600">Use AI to determine the best times to post for each platform</p>
+                <p className="text-sm text-gray-600">
+                  Use AI to determine the best times to post for each platform
+                </p>
               </div>
               <Switch defaultChecked />
             </div>
             <div className="flex items-center justify-between">
               <div>
                 <h4 className="font-medium">Cross-post content</h4>
-                <p className="text-sm text-gray-600">Automatically adapt and post content across multiple platforms</p>
+                <p className="text-sm text-gray-600">
+                  Automatically adapt and post content across multiple platforms
+                </p>
               </div>
               <Switch defaultChecked />
             </div>
@@ -155,7 +184,9 @@ const SocialAccounts = () => {
         <Card>
           <CardHeader>
             <CardTitle>Permissions & Access</CardTitle>
-            <CardDescription>Review the permissions granted to Momentum AI</CardDescription>
+            <CardDescription>
+              Review the permissions granted to Momentum AI
+            </CardDescription>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
@@ -178,8 +209,9 @@ const SocialAccounts = () => {
                 </div>
               </div>
               <p className="text-xs text-gray-500 mt-4">
-                These permissions allow Momentum AI to manage your social media content effectively. 
-                You can revoke access at any time by disconnecting your accounts.
+                These permissions allow Momentum AI to manage your social media
+                content effectively. You can revoke access at any time by
+                disconnecting your accounts.
               </p>
             </div>
           </CardContent>

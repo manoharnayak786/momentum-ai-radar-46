@@ -1,0 +1,11 @@
+dist
+build
+node_modules
+*.min.js
+*.min.css
+coverage
+.next
+.nuxt
+.vscode
+.idea
+*.log

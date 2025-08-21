@@ -1,8 +1,5 @@
-
 export const SocialProof = () => {
-  const companies = [
-    "Notion", "Figma", "Stripe", "Vercel", "Linear", "Framer"
-  ];
+  const companies = ["Notion", "Figma", "Stripe", "Vercel", "Linear", "Framer"];
 
   return (
     <section className="py-12 bg-white">
