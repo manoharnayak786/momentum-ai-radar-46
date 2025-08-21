@@ -3,37 +3,28 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Link, useNavigate } from "react-router-dom";
-import { useToast } from "@/hooks/use-toast";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import { useAuth } from "@/context/AuthContext";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
+  const { login, isLoading } = useAuth();
   const navigate = useNavigate();
-  const { toast } = useToast();
+  const location = useLocation();
+
+  // Get the intended destination from location state
+  const from = location.state?.from?.pathname || "/dashboard";
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsLoading(true);
     
-    // Simulate authentication with dummy data
-    setTimeout(() => {
-      if (email && password) {
-        toast({
-          title: "Login successful!",
-          description: "Welcome back to Momentum AI.",
-        });
-        navigate("/dashboard");
-      } else {
-        toast({
-          title: "Login failed",
-          description: "Please enter valid credentials.",
-          variant: "destructive",
-        });
-      }
-      setIsLoading(false);
-    }, 1000);
+    try {
+      await login({ email, password });
+      navigate(from, { replace: true });
+    } catch (error) {
+      // Error is handled by AuthContext
+    }
   };
 
   return (

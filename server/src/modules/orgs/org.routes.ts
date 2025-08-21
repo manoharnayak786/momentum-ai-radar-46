@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { authGuard } from '@/middleware/authGuard';
+import { authGuard } from '../../middleware/authGuard';
 import { OrgController } from './org.controller';
 
 const router = Router();

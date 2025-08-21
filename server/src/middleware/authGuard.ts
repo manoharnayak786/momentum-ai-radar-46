@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { JwtUtils } from '@/utils/jwt';
+import { JwtUtils } from '../utils/jwt';
 import { AppError } from './errorHandler';
 
 export const authGuard = (req: Request, res: Response, next: NextFunction): void => {

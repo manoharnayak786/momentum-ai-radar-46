@@ -3,14 +3,14 @@ import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import cookieParser from 'cookie-parser';
-import { config } from '@/config/env';
-import { errorHandler, notFoundHandler } from '@/middleware/errorHandler';
+import { config } from './config/env';
+import { errorHandler, notFoundHandler } from './middleware/errorHandler';
 
 // Import routes
-import authRoutes from '@/modules/auth/auth.routes';
-import userRoutes from '@/modules/users/user.routes';
-import orgRoutes from '@/modules/orgs/org.routes';
-import healthRoutes from '@/modules/health/health.routes';
+import authRoutes from './modules/auth/auth.routes';
+import userRoutes from './modules/users/user.routes';
+import orgRoutes from './modules/orgs/org.routes';
+import healthRoutes from './modules/health/health.routes';
 
 export function createApp(): express.Application {
   const app = express();

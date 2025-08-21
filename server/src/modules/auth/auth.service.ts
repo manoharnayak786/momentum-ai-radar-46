@@ -1,16 +1,14 @@
 import bcrypt from 'bcrypt';
-import { prisma } from '@/prisma/client';
-import { JwtUtils } from '@/utils/jwt';
-import { config } from '@/config/env';
-import { AppError } from '@/middleware/errorHandler';
+import { mockDb } from '../../db/mock';
+import { JwtUtils } from '../../utils/jwt';
+import { config } from '../../config/env';
+import { AppError } from '../../middleware/errorHandler';
 import { RegisterRequestType, LoginRequestType, AuthResponse, RefreshResponse } from './auth.types';
 
 export class AuthService {
   static async register(data: RegisterRequestType): Promise<AuthResponse> {
     // Check if user already exists
-    const existingUser = await prisma.user.findUnique({
-      where: { email: data.email },
-    });
+    const existingUser = await mockDb.findUserByEmail(data.email);
 
     if (existingUser) {
       throw new AppError('User with this email already exists', 409);
@@ -19,50 +17,39 @@ export class AuthService {
     // Hash password
     const passwordHash = await bcrypt.hash(data.password, config.bcrypt.saltRounds);
 
-    // Create user and default organization in a transaction
-    const result = await prisma.$transaction(async (tx: any) => {
-      // Create user
-      const user = await tx.user.create({
-        data: {
-          name: data.name,
-          email: data.email,
-          passwordHash,
-        },
-      });
+    // Create user
+    const user = await mockDb.createUser({
+      name: data.name,
+      email: data.email,
+      passwordHash,
+    });
 
-      // Create default organization
-      const org = await tx.organization.create({
-        data: {
-          name: `${data.name}'s Workspace`,
-        },
-      });
+    // Create default organization
+    const org = await mockDb.createOrganization({
+      name: `${data.name}'s Workspace`,
+    });
 
-      // Create membership
-      await tx.membership.create({
-        data: {
-          userId: user.id,
-          orgId: org.id,
-          role: 'OWNER',
-        },
-      });
-
-      return user;
+    // Create membership
+    await mockDb.createMembership({
+      userId: user.id,
+      orgId: org.id,
+      role: 'OWNER',
     });
 
     // Generate tokens
     const tokens = JwtUtils.generateTokenPair({
-      userId: result.id,
-      email: result.email,
+      userId: user.id,
+      email: user.email,
     });
 
     // Store refresh token
-    await this.storeRefreshToken(result.id, tokens.refreshToken);
+    await this.storeRefreshToken(user.id, tokens.refreshToken);
 
     return {
       user: {
-        id: result.id,
-        email: result.email,
-        name: result.name,
+        id: user.id,
+        email: user.email,
+        name: user.name,
       },
       accessToken: tokens.accessToken,
       refreshToken: tokens.refreshToken,
@@ -71,9 +58,7 @@ export class AuthService {
 
   static async login(data: LoginRequestType): Promise<AuthResponse> {
     // Find user
-    const user = await prisma.user.findUnique({
-      where: { email: data.email },
-    });
+    const user = await mockDb.findUserByEmail(data.email);
 
     if (!user) {
       throw new AppError('Invalid credentials', 401);
@@ -109,21 +94,16 @@ export class AuthService {
     const hashedToken = JwtUtils.hashRefreshToken(refreshToken);
 
     // Find refresh token
-    const storedToken = await prisma.refreshToken.findUnique({
-      where: { token: hashedToken },
-      include: { user: true },
-    });
+    const storedToken = await mockDb.findRefreshToken(hashedToken);
 
     if (!storedToken) {
       throw new AppError('Invalid refresh token', 401);
     }
 
     // Check if token is expired
-    if (storedToken.expiresAt < new Date()) {
+    if (new Date(storedToken.expiresAt) < new Date()) {
       // Delete expired token
-      await prisma.refreshToken.delete({
-        where: { id: storedToken.id },
-      });
+      await mockDb.deleteRefreshToken(hashedToken);
       throw new AppError('Refresh token expired', 401);
     }
 
@@ -140,9 +120,7 @@ export class AuthService {
     const hashedToken = JwtUtils.hashRefreshToken(refreshToken);
 
     // Delete refresh token
-    await prisma.refreshToken.deleteMany({
-      where: { token: hashedToken },
-    });
+    await mockDb.deleteRefreshToken(hashedToken);
   }
 
   private static async storeRefreshToken(userId: string, refreshToken: string): Promise<void> {
@@ -151,20 +129,13 @@ export class AuthService {
     expiresAt.setDate(expiresAt.getDate() + 7); // 7 days
 
     // Clean up old tokens for this user
-    await prisma.refreshToken.deleteMany({
-      where: {
-        userId,
-        expiresAt: { lt: new Date() },
-      },
-    });
+    await mockDb.deleteExpiredRefreshTokens(userId);
 
     // Store new token
-    await prisma.refreshToken.create({
-      data: {
-        userId,
-        token: hashedToken,
-        expiresAt,
-      },
+    await mockDb.createRefreshToken({
+      userId,
+      token: hashedToken,
+      expiresAt: expiresAt.toISOString(),
     });
   }
 }

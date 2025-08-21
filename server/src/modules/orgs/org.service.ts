@@ -1,24 +1,10 @@
-import { prisma } from '@/prisma/client';
+import { mockDb } from '../../db/mock';
 
 export class OrgService {
   static async getUserOrganizations(userId: string) {
-    const memberships = await prisma.membership.findMany({
-      where: { userId },
-      include: {
-        org: {
-          select: {
-            id: true,
-            name: true,
-            createdAt: true,
-          },
-        },
-      },
-      orderBy: {
-        createdAt: 'asc',
-      },
-    });
+    const memberships = await mockDb.findMembershipsByUserId(userId);
 
-    return memberships.map((m: any) => ({
+    return memberships.map(m => ({
       id: m.org.id,
       name: m.org.name,
       role: m.role,
@@ -27,29 +13,21 @@ export class OrgService {
   }
 
   static async createOrganization(userId: string, name: string) {
-    const result = await prisma.$transaction(async (tx: any) => {
-      // Create organization
-      const org = await tx.organization.create({
-        data: { name },
-      });
+    // Create organization
+    const org = await mockDb.createOrganization({ name });
 
-      // Create membership for the creator as owner
-      await tx.membership.create({
-        data: {
-          userId,
-          orgId: org.id,
-          role: 'OWNER',
-        },
-      });
-
-      return org;
+    // Create membership for the creator as owner
+    await mockDb.createMembership({
+      userId,
+      orgId: org.id,
+      role: 'OWNER',
     });
 
     return {
-      id: result.id,
-      name: result.name,
+      id: org.id,
+      name: org.name,
       role: 'OWNER' as const,
-      createdAt: result.createdAt,
+      createdAt: org.createdAt,
     };
   }
 }

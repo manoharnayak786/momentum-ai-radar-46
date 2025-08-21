@@ -1,13 +1,10 @@
 import { createApp } from './app';
-import { config } from '@/config/env';
-import { logger } from '@/config/logger';
-import { prisma } from '@/prisma/client';
+import { config } from './config/env';
+import { logger } from './config/logger';
 
 async function bootstrap() {
   try {
-    // Test database connection
-    await prisma.$connect();
-    logger.info('Database connected successfully');
+    logger.info('Using mock database for development');
 
     // Create Express app
     const app = createApp();
@@ -27,7 +24,6 @@ async function bootstrap() {
           process.exit(1);
         }
 
-        await prisma.$disconnect();
         logger.info('Server closed successfully');
         process.exit(0);
       });

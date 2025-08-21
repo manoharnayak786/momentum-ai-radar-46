@@ -3,7 +3,8 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "@/context/AuthContext";
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -12,11 +13,28 @@ const Signup = () => {
     password: "",
     confirmPassword: ""
   });
+  const { register, isLoading } = useAuth();
+  const navigate = useNavigate();
 
-  const handleSignup = (e: React.FormEvent) => {
+  const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle signup logic here
-    console.log("Signup attempt:", formData);
+    
+    if (formData.password !== formData.confirmPassword) {
+      // Could use a more sophisticated validation here
+      alert("Passwords don't match");
+      return;
+    }
+
+    try {
+      await register({
+        name: formData.name,
+        email: formData.email,
+        password: formData.password,
+      });
+      navigate("/dashboard");
+    } catch (error) {
+      // Error is handled by AuthContext
+    }
   };
 
   const handleInputChange = (field: string, value: string) => {
@@ -96,8 +114,8 @@ const Signup = () => {
                   required
                 />
               </div>
-              <Button type="submit" className="w-full bg-indigo-600 hover:bg-indigo-700">
-                Create Account
+              <Button type="submit" className="w-full bg-indigo-600 hover:bg-indigo-700" disabled={isLoading}>
+                {isLoading ? "Creating Account..." : "Create Account"}
               </Button>
             </form>
 
